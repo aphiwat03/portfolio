@@ -1,0 +1,449 @@
+<!DOCTYPE html>
+<html lang="en" class="scroll-smooth">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Portfolio</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+    <script src="https://kit.fontawesome.com/64d58efce2.js" crossorigin="anonymous"></script>
+    <style>
+        body {
+            font-family: 'Inter', sans-serif;
+        }
+
+        .glass-card {
+            background: rgba(255, 255, 255, 0.03);
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+        }
+
+        .text-gradient {
+            background: linear-gradient(to right, #60a5fa, #3b82f6, #2563eb);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+
+        .bg-gradient-blue {
+            background: radial-gradient(circle at top right, #1e3a8a 0%, #0f172a 100%);
+        }
+
+        .project-card:hover .project-overlay {
+            opacity: 1;
+        }
+
+        @keyframes float {
+            0% {
+                transform: translateY(0px);
+            }
+
+            50% {
+                transform: translateY(-10px);
+            }
+
+            100% {
+                transform: translateY(0px);
+            }
+        }
+
+        .float-anim {
+            animation: float 3s ease-in-out infinite;
+        }
+
+        .hide-scrollbar::-webkit-scrollbar {
+            display: none;
+        }
+
+        .hide-scrollbar {
+            -ms-overflow-style: none;
+            scrollbar-width: none;
+        }
+    </style>
+</head>
+
+<body class="bg-slate-950 text-slate-200 selection:bg-blue-500/30">
+
+    <nav id="navbar" class="fixed top-0 w-full z-50 transition-all duration-300 py-6">
+        <div class="container mx-auto px-6 flex justify-between items-center">
+            <div class="text-2xl font-bold tracking-tighter flex items-center gap-2">
+                <div class="w-8 h-8 bg-blue-600 rounded-lg flex items-center justify-center">
+                    <span class="text-white text-sm">P</span>
+                </div>
+                <span>Portfolio</span>
+            </div>
+
+            <div class="hidden md:flex items-center space-x-8">
+                <a href="#home" class="hover:text-blue-400 transition-colors">Home</a>
+                <a href="#skills" class="hover:text-blue-400 transition-colors">Skills</a>
+                <a href="#projects" class="hover:text-blue-400 transition-colors">Projects</a>
+                <a href="#contact" class="hover:text-blue-400 transition-colors">Contact</a>
+            </div>
+
+            <button class="md:hidden text-2xl" id="menu-btn">
+                <i class="fas fa-bars"></i>
+            </button>
+        </div>
+    </nav>
+
+    <section id="home" class="relative min-h-screen flex items-center pt-20 overflow-hidden bg-gradient-blue">
+        <div class="absolute inset-0 opacity-20 pointer-events-none">
+            <div class="absolute top-1/4 left-1/4 w-96 h-96 bg-blue-600 rounded-full blur-[120px]"></div>
+            <div class="absolute bottom-1/4 right-1/4 w-96 h-96 bg-indigo-600 rounded-full blur-[120px]"></div>
+        </div>
+
+        <div class="container mx-auto px-6 relative z-10">
+            <div class="flex flex-col lg:flex-row items-center justify-between gap-12">
+                <div class="max-w-2xl lg:w-1/2">
+                    <h2 class="text-blue-400 font-medium tracking-widest mb-4 uppercase text-sm">Welcome to my space
+                    </h2>
+                    <h1 class="text-5xl md:text-7xl font-bold mb-6 leading-tight">
+                        I'm <span class="text-gradient">Aphiwat Phankham</span>
+                    </h1>
+                    <p class="text-slate-400 text-lg md:text-xl mb-10 leading-relaxed">
+                        I am actively seeking a full-time Full-Stack Developer position. I focus on building responsive
+                        web applications, writing clean code, and delivering user-centric solutions.
+                    </p>
+                    <div class="flex flex-wrap gap-4">
+                        <a href="#projects"
+                            class="px-8 py-4 bg-blue-600 hover:bg-blue-700 text-white rounded-xl font-semibold transition-all flex items-center gap-2">
+                            View Projects <i class="fas fa-arrow-right text-sm"></i>
+                        </a>
+                        <a href="#contact"
+                            class="px-8 py-4 border border-slate-700 hover:border-blue-500 rounded-xl font-semibold transition-all">
+                            Let's Talk
+                        </a>
+                    </div>
+                </div>
+                <div class="lg:w-1/2 flex justify-center lg:justify-end">
+                    <!-- Image Placeholder (Feel free to update src) -->
+                    <div
+                        class="relative w-72 h-72 md:w-96 md:h-96 rounded-full p-2 bg-gradient-to-tr from-blue-600 to-indigo-600 shadow-2xl shadow-blue-500/20 float-anim">
+                        <img src="./pic/6530301089.jpeg" alt="Profile"
+                            class="w-full h-full object-cover rounded-full border-4 border-slate-900">
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="absolute bottom-10 left-1/2 -translate-x-1/2 float-anim text-slate-500">
+            <i class="fas fa-chevron-down text-2xl"></i>
+        </div>
+    </section>
+
+
+    <section id="skills" class="py-24 bg-slate-900/50">
+        <div class="container mx-auto px-6">
+            <div class="mb-16">
+                <h2 class="text-blue-400 font-medium mb-2 uppercase tracking-widest text-sm">Capabilities</h2>
+                <h3 class="text-4xl font-bold text-white">Skills & Expertise</h3>
+            </div>
+
+            <!-- ปรับ Grid ให้รองรับ 4 คอลัมน์ -->
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
+
+                <!-- Frontend -->
+                <div
+                    class="glass-card p-8 rounded-2xl hover:-translate-y-1 transition-transform border border-slate-700/50">
+                    <h4 class="text-xl font-bold text-white mb-4 flex items-center gap-3">
+                        <i class="fas fa-layer-group text-blue-500"></i> Frontend
+                    </h4>
+                    <div class="text-slate-400 space-y-3">
+                        <p class="flex items-center gap-2"><span class="w-1.5 h-1.5 bg-blue-500 rounded-full"></span>
+                            HTML / CSS / JS / TS</p>
+                        <p class="flex items-center gap-2"><span class="w-1.5 h-1.5 bg-blue-500 rounded-full"></span>
+                            Next.js</p>
+                        <p class="flex items-center gap-2"><span class="w-1.5 h-1.5 bg-blue-500 rounded-full"></span>
+                            React / React Native</p>
+                        <p class="flex items-center gap-2"><span class="w-1.5 h-1.5 bg-blue-500 rounded-full"></span>
+                            Tailwind CSS / Bootstrap</p>
+                    </div>
+                </div>
+
+                <!-- Backend -->
+                <div
+                    class="glass-card p-8 rounded-2xl hover:-translate-y-1 transition-transform border border-slate-700/50">
+                    <h4 class="text-xl font-bold text-white mb-4 flex items-center gap-3">
+                        <i class="fas fa-server text-blue-500"></i> Backend
+                    </h4>
+                    <div class="text-slate-400 space-y-3">
+                        <p class="flex items-center gap-2"><span class="w-1.5 h-1.5 bg-blue-500 rounded-full"></span>
+                            NestJS (Node.js)</p>
+                        <p class="flex items-center gap-2"><span class="w-1.5 h-1.5 bg-blue-500 rounded-full"></span>
+                            Prisma (ORM)</p>
+                        <p class="flex items-center gap-2"><span class="w-1.5 h-1.5 bg-blue-500 rounded-full"></span>
+                            PostgreSQL / MySQL</p>
+                    </div>
+                </div>
+
+                <!-- Familiar / Others -->
+                <div
+                    class="glass-card p-8 rounded-2xl hover:-translate-y-1 transition-transform border border-slate-700/50">
+                    <h4 class="text-xl font-bold text-white mb-4 flex items-center gap-3">
+                        <i class="fas fa-code-branch text-blue-500"></i> Familiar
+                    </h4>
+                    <div class="text-slate-400 space-y-3">
+                        <p class="flex items-center gap-2"><span class="w-1.5 h-1.5 bg-blue-500 rounded-full"></span>
+                            Python</p>
+                        <p class="flex items-center gap-2"><span class="w-1.5 h-1.5 bg-blue-500 rounded-full"></span> C
+                            / C++</p>
+                        <p class="flex items-center gap-2"><span class="w-1.5 h-1.5 bg-blue-500 rounded-full"></span>
+                            OpenCV</p>
+                    </div>
+                </div>
+
+                <!-- Learning -->
+                <div
+                    class="glass-card p-8 rounded-2xl hover:-translate-y-1 transition-transform border border-slate-700/50">
+                    <h4 class="text-xl font-bold text-white mb-4 flex items-center gap-3">
+                        <i class="fas fa-book-reader text-blue-500"></i> Learning
+                    </h4>
+                    <div class="text-slate-400 space-y-3">
+                        <p class="flex items-center gap-2"><span class="w-1.5 h-1.5 bg-amber-500 rounded-full"></span>
+                            Flutter</p>
+                        <p class="flex items-center gap-2"><span class="w-1.5 h-1.5 bg-amber-500 rounded-full"></span>
+                            Docker</p>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </section>
+
+    <section id="projects" class="py-24 bg-slate-950">
+        <div class="container mx-auto px-6">
+            <div class="flex flex-col md:flex-row justify-between items-end mb-16 gap-6">
+                <div>
+                    <h2 class="text-blue-400 font-medium mb-2 uppercase tracking-widest text-sm">Portfolio</h2>
+                    <h3 class="text-4xl font-bold text-white">Selected Works</h3>
+                </div>
+                <div class="flex gap-4">
+                    <button id="btn-prev"
+                        class="w-12 h-12 rounded-full border border-slate-800 flex items-center justify-center text-white hover:bg-blue-600 hover:border-blue-600 transition-all">
+                        <i class="fas fa-arrow-left"></i>
+                    </button>
+                    <button id="btn-next"
+                        class="w-12 h-12 rounded-full border border-slate-800 flex items-center justify-center text-white hover:bg-blue-600 hover:border-blue-600 transition-all">
+                        <i class="fas fa-arrow-right"></i>
+                    </button>
+                </div>
+            </div>
+
+            <!-- Carousel Container -->
+            <div id="carousel"
+                class="flex gap-8 overflow-x-auto snap-x snap-mandatory hide-scrollbar scroll-smooth pb-8">
+
+                <!-- Project 1: Frontend Mobile -->
+                <div
+                    class="group project-card relative overflow-hidden rounded-2xl bg-slate-900 border border-slate-800 transition-all hover:-translate-y-2 shrink-0 w-full md:w-[calc(50%-1rem)] lg:w-[calc(33.333%-1.5rem)] snap-start">
+                    <img src="https://placehold.co/600x400/1e293b/60a5fa?text=Mobile+App" alt="Frontend Mobile Project"
+                        class="w-full h-64 object-cover opacity-80 group-hover:scale-105 transition-transform duration-500">
+                    <div class="p-6">
+                        <span class="text-blue-400 text-xs font-semibold uppercase">Frontend Mobile</span>
+                        <h4 class="text-xl font-bold text-white mt-1 mb-3">Finance Tracker Mobile</h4>
+                        <p class="text-slate-400 text-sm mb-4 leading-relaxed">แอปพลิเคชันจัดการการเงินบนมือถือ เน้น UI
+                            ที่ใช้งานง่ายและตอบสนองรวดเร็ว</p>
+                        <div class="flex gap-2">
+                            <span class="px-3 py-1 bg-slate-800 rounded-full text-xs text-slate-300">React Native</span>
+                            <span class="px-3 py-1 bg-slate-800 rounded-full text-xs text-slate-300">Tailwind</span>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Project 2: Computer Vision -->
+                <div
+                    class="group project-card relative overflow-hidden rounded-2xl bg-slate-900 border border-slate-800 transition-all hover:-translate-y-2 shrink-0 w-full md:w-[calc(50%-1rem)] lg:w-[calc(33.333%-1.5rem)] snap-start">
+                    <img src="https://placehold.co/600x400/1e293b/60a5fa?text=Computer+Vision"
+                        alt="Computer Vision Project"
+                        class="w-full h-64 object-cover opacity-80 group-hover:scale-105 transition-transform duration-500">
+                    <div class="p-6">
+                        <span class="text-green-400 text-xs font-semibold uppercase">Computer Vision</span>
+                        <h4 class="text-xl font-bold text-white mt-1 mb-3">Defect Detection AI</h4>
+                        <p class="text-slate-400 text-sm mb-4 leading-relaxed">
+                            ระบบตรวจจับจุดบกพร่องของชิ้นส่วนโรงงานอัตโนมัติด้วยโมเดลวิเคราะห์ภาพ</p>
+                        <div class="flex gap-2">
+                            <span class="px-3 py-1 bg-slate-800 rounded-full text-xs text-slate-300">Python</span>
+                            <span class="px-3 py-1 bg-slate-800 rounded-full text-xs text-slate-300">OpenCV</span>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Project 3: Internship (UX/UI Dev) -->
+                <div
+                    class="group project-card relative overflow-hidden rounded-2xl bg-slate-900 border border-slate-800 transition-all hover:-translate-y-2 shrink-0 w-full md:w-[calc(50%-1rem)] lg:w-[calc(33.333%-1.5rem)] snap-start">
+                    <img src="https://placehold.co/600x400/1e293b/60a5fa?text=UX/UI+Internship" alt="Internship Project"
+                        class="w-full h-64 object-cover opacity-80 group-hover:scale-105 transition-transform duration-500">
+                    <div class="p-6">
+                        <span class="text-purple-400 text-xs font-semibold uppercase">Co-op Internship (UX/UI
+                            Dev)</span>
+                        <h4 class="text-xl font-bold text-white mt-1 mb-3">Bitec Buri Projects</h4>
+                        <p class="text-slate-400 text-sm mb-4 leading-relaxed">สหกิจศึกษา (17 พ.ย. 2025 - 31 มี.ค. 2026)
+                            พัฒนาและออกแบบประสบการณ์ผู้ใช้งานสำหรับแพลตฟอร์มขององค์กร</p>
+                        <div class="flex flex-wrap gap-2">
+                            <span class="px-3 py-1 bg-slate-800 rounded-full text-xs text-slate-300">Figma</span>
+                            <span class="px-3 py-1 bg-slate-800 rounded-full text-xs text-slate-300">Frontend Dev</span>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Project 4: Full-Stack (Ongoing) -->
+                <div
+                    class="group project-card relative overflow-hidden rounded-2xl bg-slate-900 border border-slate-800 transition-all hover:-translate-y-2 shrink-0 w-full md:w-[calc(50%-1rem)] lg:w-[calc(33.333%-1.5rem)] snap-start ring-2 ring-blue-500/50">
+                    <img src="https://placehold.co/600x400/1e293b/60a5fa?text=Fullstack+(Ongoing)" alt="Ongoing Project"
+                        class="w-full h-64 object-cover opacity-80 group-hover:scale-105 transition-transform duration-500">
+                    <div class="p-6 relative">
+                        <div class="absolute top-0 right-6 -translate-y-1/2">
+                            <span
+                                class="bg-blue-500 text-white text-[10px] font-bold px-2 py-1 rounded-full animate-pulse">ONGOING</span>
+                        </div>
+                        <span class="text-orange-400 text-xs font-semibold uppercase">Full-Stack Development</span>
+                        <h4 class="text-xl font-bold text-white mt-1 mb-3">Smart Butcher Marketplace</h4>
+                        <p class="text-slate-400 text-sm mb-4 leading-relaxed">แพลตฟอร์มมาร์เก็ตเพลสเต็มรูปแบบ
+                            กำลังพัฒนาทั้งระบบ Frontend และ Backend Architecture</p>
+                        <div class="flex flex-wrap gap-2">
+                            <span class="px-3 py-1 bg-slate-800 rounded-full text-xs text-slate-300">Next.js</span>
+                            <span class="px-3 py-1 bg-slate-800 rounded-full text-xs text-slate-300">NestJS</span>
+                            <span class="px-3 py-1 bg-slate-800 rounded-full text-xs text-slate-300">Prisma</span>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </section>
+
+    <section id="contact" class="py-24 bg-slate-900/30">
+        <div class="container mx-auto px-6">
+            <div class="max-w-2xl mx-auto text-center mb-16">
+                <h2 class="text-blue-400 font-medium mb-2 uppercase tracking-widest text-sm">Get In Touch</h2>
+                <h3 class="text-4xl font-bold text-white mb-6">Let's Connect</h3>
+                <p class="text-slate-400 text-lg">
+                    I'm currently looking for new opportunities. Whether you have a question or just want to say hi,
+                    I'll try my best to get back to you!
+                </p>
+            </div>
+
+            <div class="flex flex-col md:flex-row justify-center items-center gap-6 md:gap-12">
+                <!-- Email -->
+                <a href="mailto:aphiwat240846@gmail.com"
+                    class="group flex flex-col items-center gap-4 p-8 glass-card rounded-2xl w-full md:w-64 hover:-translate-y-2 transition-transform border border-slate-700/50 hover:border-blue-500/50">
+                    <div
+                        class="w-16 h-16 bg-blue-500/10 rounded-full flex items-center justify-center group-hover:bg-blue-500/20 transition-colors">
+                        <i class="fas fa-envelope text-2xl text-blue-400"></i>
+                    </div>
+
+                    <div class="text-center">
+                        <h4 class="text-white font-bold mb-1">Email</h4>
+                        <p class="text-sm text-slate-400">Drop me a line</p>
+                    </div>
+                </a>
+
+                <!-- GitHub -->
+                <a href="https://github.com/aphiwat03" target="_blank" rel="noopener noreferrer"
+                    class="group flex flex-col items-center gap-4 p-8 glass-card rounded-2xl w-full md:w-64 hover:-translate-y-2 transition-transform border border-slate-700/50 hover:border-slate-500/50">
+                    <div
+                        class="w-16 h-16 bg-gray-500/10 rounded-full flex items-center justify-center group-hover:bg-gray-500/20 transition-colors">
+                        <i class="fab fa-github text-2xl text-gray-300"></i>
+                    </div>
+                    <div class="text-center">
+                        <h4 class="text-white font-bold mb-1">GitHub</h4>
+                        <p class="text-sm text-slate-400">Check my code</p>
+                    </div>
+                </a>
+
+                <!-- LinkedIn -->
+                <a href="https://www.linkedin.com/in/aphiwat-phankham/" target="_blank" rel="noopener noreferrer"
+                    class="group flex flex-col items-center gap-4 p-8 glass-card rounded-2xl w-full md:w-64 hover:-translate-y-2 transition-transform border border-slate-700/50 hover:border-blue-600/50">
+                    <div
+                        class="w-16 h-16 bg-blue-600/10 rounded-full flex items-center justify-center group-hover:bg-blue-600/20 transition-colors">
+                        <i class="fab fa-linkedin-in text-2xl text-blue-500"></i>
+                    </div>
+                    <div class="text-center">
+                        <h4 class="text-white font-bold mb-1">LinkedIn</h4>
+                        <p class="text-sm text-slate-400">Professional profile</p>
+                    </div>
+                </a>
+            </div>
+        </div>
+    </section>
+
+    <footer class="py-12 border-t border-slate-900">
+        <div class="container mx-auto px-6 flex flex-col md:flex-row justify-between items-center gap-6">
+            <p class="text-slate-500 text-sm">© 2026 Aphiwat Phankham.</p>
+        </div>
+    </footer>
+
+    <script>
+        /* Navbar scroll effect */
+        const navbar = document.getElementById('navbar');
+        window.addEventListener('scroll', () => {
+            if (window.scrollY > 50) {
+                navbar.classList.add('bg-slate-950/80', 'backdrop-blur-md', 'py-4', 'shadow-2xl');
+                navbar.classList.remove('py-6');
+            } else {
+                navbar.classList.remove('bg-slate-950/80', 'backdrop-blur-md', 'py-4', 'shadow-2xl');
+                navbar.classList.add('py-6');
+            }
+        });
+
+        /* Form Submission Mock */
+        function handleFormSubmit() {
+            const btn = document.querySelector('#contact-form button');
+            const success = document.getElementById('success-msg');
+            const form = document.getElementById('contact-form');
+
+            btn.innerHTML = '<i class="fas fa-spinner fa-spin"></i> Sending...';
+            btn.disabled = true;
+
+            // Simulate network request
+            setTimeout(() => {
+                form.classList.add('hidden');
+                success.classList.remove('hidden');
+            }, 1500);
+        }
+
+        /* Simple Reveal on Scroll */
+        const observerOptions = {
+            threshold: 0.1
+        };
+
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.classList.add('opacity-100', 'translate-y-0');
+                    entry.target.classList.remove('opacity-0', 'translate-y-10');
+                }
+            });
+        }, observerOptions);
+
+        document.querySelectorAll('section').forEach(section => {
+            section.classList.add('transition-all', 'duration-700', 'opacity-0', 'translate-y-10');
+            observer.observe(section);
+        });
+    </script>
+    <script>
+        document.addEventListener('DOMContentLoaded', function () {
+            const carousel = document.getElementById('carousel');
+            const btnPrev = document.getElementById('btn-prev');
+            const btnNext = document.getElementById('btn-next');
+
+            const scrollAmount = () => {
+                const card = carousel.querySelector('.project-card');
+                return card.offsetWidth + 32;
+            };
+
+            btnPrev.addEventListener('click', () => {
+                carousel.scrollBy({ left: -scrollAmount(), behavior: 'smooth' });
+            });
+
+            btnNext.addEventListener('click', () => {
+                carousel.scrollBy({ left: scrollAmount(), behavior: 'smooth' });
+            });
+        });
+    </script>
+</body>
+
+</html>
