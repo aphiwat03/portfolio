@@ -4,7 +4,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Project - Defect Detection AI</title>
+    <title>Project - Court Reservation Mobile</title>
     <script src="https://cdn.tailwindcss.com"></script>
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -33,9 +33,17 @@
         }
 
         @keyframes float {
-            0% { transform: translateY(0px); }
-            50% { transform: translateY(-10px); }
-            100% { transform: translateY(0px); }
+            0% {
+                transform: translateY(0px);
+            }
+
+            50% {
+                transform: translateY(-10px);
+            }
+
+            100% {
+                transform: translateY(0px);
+            }
         }
 
         .float-anim {
@@ -48,17 +56,18 @@
 
     <nav id="navbar" class="fixed top-0 w-full z-50 transition-all duration-300 py-6">
         <div class="container mx-auto px-6 flex justify-between items-center">
-            <div class="text-2xl font-bold tracking-tighter flex items-center gap-2">
+            <a href="../portfolio.html"
+                class="text-2xl font-bold tracking-tighter flex items-center gap-2 hover:opacity-80 transition-opacity">
                 <div class="w-8 h-8 bg-blue-600 rounded-lg flex items-center justify-center">
                     <span class="text-white text-sm">P</span>
                 </div>
                 <span>Portfolio</span>
-            </div>
+            </a>
 
             <div class="hidden md:flex items-center space-x-8">
-                <a href="../portfolio.html#home" class="hover:text-blue-400 transition-colors">Home</a>
-                <a href="../portfolio.html#projects" class="hover:text-blue-400 transition-colors">Projects</a>
-                <a href="../portfolio.html#contact" class="hover:text-blue-400 transition-colors">Contact</a>
+                <a href="#project-header" class="hover:text-blue-400 transition-colors">Overview</a>
+                <a href="#project-details" class="hover:text-blue-400 transition-colors">Project Detail</a>
+                <a href="#project-insights" class="hover:text-blue-400 transition-colors">Insights</a>
             </div>
 
             <button class="md:hidden text-2xl" id="menu-btn">
@@ -73,10 +82,10 @@
             <div class="max-w-3xl">
                 <h2 class="text-blue-400 font-medium tracking-widest mb-4 uppercase text-sm">Project Overview</h2>
                 <h1 class="text-5xl md:text-6xl font-bold mb-6 leading-tight">
-                    <span class="text-gradient">Defect Detection</span> AI
+                    <span class="text-gradient">Court Reservation</span> Mobile
                 </h1>
                 <p class="text-slate-400 text-lg md:text-xl mb-10 leading-relaxed">
-                    ระบบตรวจจับจุดบกพร่องของชิ้นส่วนโรงงานอัตโนมัติด้วยโมเดลวิเคราะห์ภาพ ช่วยลดความผิดพลาดและเพิ่มความเร็วในการตรวจสอบ
+                    แอปพลิเคชันจองสนามบนมือถือ เน้นประสบการณ์การใช้งานที่สะดวกและรวดเร็ว
                 </p>
             </div>
         </div>
@@ -87,28 +96,77 @@
         <div class="container mx-auto px-6">
             <div class="mb-16">
                 <h2 class="text-blue-400 font-medium mb-2 uppercase tracking-widest text-sm">Deep Dive</h2>
-                <h3 class="text-4xl font-bold text-white">Features & Technologies</h3>
+                <h3 class="text-4xl font-bold text-white mb-6">About The Project</h3>
+
+                <p class="text-slate-400 text-lg leading-relaxed max-w-4xl">
+                    Court Reservation Mobile
+                    คือแอปพลิเคชันที่ออกแบบมาเพื่อแก้ปัญหาความยุ่งยากในการโทรจองสนามกีฬาแบบเดิมๆ
+                    ผู้ใช้สามารถเช็คคิวว่างของสนามแบบเรียลไทม์, ทำการจองและสามารถส้รางกลุ่มหาเพื่อนเล่นกีฬาได้
+                </p>
             </div>
+
             <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
                 <div class="glass-card p-8 rounded-2xl border border-slate-700/50">
                     <h4 class="text-xl font-bold text-white mb-4">Key Features</h4>
                     <ul class="text-slate-400 space-y-3">
-                        <li>• Real-time Defect Detection</li>
-                        <li>• Automated Image Analysis</li>
-                        <li>• High Accuracy Model</li>
+                        <li>• Real-time Court Availability Check</li>
+                        <li>• Booking & Payment System</li>
+                        <li>• Find Friends / Party System</li>
+                        <li>• User Notification System</li>
                     </ul>
                 </div>
                 <div class="glass-card p-8 rounded-2xl border border-slate-700/50">
                     <h4 class="text-xl font-bold text-white mb-4">Tech Stack</h4>
                     <ul class="text-slate-400 space-y-3">
-                        <li>• Python</li>
-                        <li>• OpenCV</li>
-                        <li>• Machine Learning / Deep Learning Frameworks</li>
+                        <li>• React Native (Expo)</li>
+                        <li>• Node.js & Express</li>
+                        <li>• MySQL Database</li>
+                        <li>• Tailwind CSS</li>
                     </ul>
                 </div>
             </div>
         </div>
     </section>
+
+    <!-- Section 3: Project Insights -->
+    <section id="project-insights" class="py-24">
+        <div class="container mx-auto px-6">
+            <div class="mb-16">
+                <h2 class="text-blue-400 font-medium mb-2 uppercase tracking-widest text-sm">Experience</h2>
+                <h3 class="text-4xl font-bold text-white">Insights & Links</h3>
+            </div>
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
+                <div
+                    class="glass-card p-8 rounded-2xl border border-slate-700/50 hover:-translate-y-2 transition-transform duration-300">
+                    <h4 class="text-xl font-bold text-white mb-4"><i class="fas fa-user-tag mr-2 text-blue-400"></i>My
+                        Role</h4>
+                    <p class="text-blue-300 font-semibold mb-6">
+                        Frontend Developer
+                    </p>
+
+                    <h4 class="text-xl font-bold text-white mb-4"><i class="fas fa-link mr-2 text-blue-400"></i>Links
+                    </h4>
+                    <a href="https://github.com/oakkmmmkk22/CourtReservationMobile" target="_blank"
+                        class="inline-flex items-center gap-2 text-blue-400 hover:text-blue-300 transition-colors">
+                        <i class="fab fa-github text-xl"></i> GitHub Repository
+                    </a>
+                </div>
+                <div
+                    class="glass-card p-8 rounded-2xl border border-slate-700/50 hover:-translate-y-2 transition-transform duration-300">
+                    <h4 class="text-xl font-bold text-white mb-4">
+                        <i class="fas fa-lightbulb mr-2 text-blue-400"></i>Challenges / Lessons Learned
+                    </h4>
+                    <ul class="text-slate-400 space-y-3 leading-relaxed">
+                        <li>• การศึกษาหลักการออกแบบ UI/UX สำหรับมือถือที่ดี และการสื่อสารภายในทีม</li>
+                        <li>• การเรียนรู้และประยุกต์ใช้เฟรมเวิร์ก React Native ในการพัฒนาแอปพลิเคชัน</li>
+                        <li>• การจำลองสภาพแวดล้อมการทำงานจริง ผ่านการปรึกษาและรายงานความคืบหน้ากับอาจารย์</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </section>
+
+
 
     <footer class="py-12 border-t border-slate-900">
         <div class="container mx-auto px-6 flex flex-col md:flex-row justify-between items-center gap-6">
@@ -144,4 +202,5 @@
         });
     </script>
 </body>
+
 </html>
