@@ -10,7 +10,6 @@
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
-    <script src="https://kit.fontawesome.com/64d58efce2.js" crossorigin="anonymous"></script>
     <style>
         body {
             font-family: 'Inter', sans-serif;
@@ -56,7 +55,7 @@
 
     <nav id="navbar" class="fixed top-0 w-full z-50 transition-all duration-300 py-6">
         <div class="container mx-auto px-6 flex justify-between items-center">
-            <a href="../portfolio.html"
+            <a href="../index.html"
                 class="text-2xl font-bold tracking-tighter flex items-center gap-2 hover:opacity-80 transition-opacity">
                 <div class="w-8 h-8 bg-blue-600 rounded-lg flex items-center justify-center">
                     <span class="text-white text-sm">P</span>
@@ -70,9 +69,19 @@
                 <a href="#project-insights" class="hover:text-blue-400 transition-colors">Insights</a>
             </div>
 
-            <button class="md:hidden text-2xl" id="menu-btn">
-                <i class="fas fa-bars"></i>
+            <button class="md:hidden text-2xl focus:outline-none hover:text-blue-400 transition-colors" id="menu-btn">
+                <i class="fas fa-bars transition-transform duration-300" id="menu-icon"></i>
             </button>
+        </div>
+
+        <div id="mobile-menu"
+            class="md:hidden bg-slate-950/95 backdrop-blur-lg absolute top-full left-0 w-full border-t border-slate-900 flex flex-col space-y-4 shadow-2xl transition-all duration-300 ease-in-out max-h-0 opacity-0 overflow-hidden px-6 py-0">
+            <a href="#project-header"
+                class="mobile-link text-lg hover:text-blue-400 transition-colors pt-4">Overview</a>
+            <a href="#project-details" class="mobile-link text-lg hover:text-blue-400 transition-colors">Project
+                Detail</a>
+            <a href="#project-insights"
+                class="mobile-link text-lg hover:text-blue-400 transition-colors pb-4">Insights</a>
         </div>
     </nav>
 
@@ -180,12 +189,12 @@
     <script>
         const navbar = document.getElementById('navbar');
         window.addEventListener('scroll', () => {
-            if (window.scrollY > 50) {
-                navbar.classList.add('bg-slate-950/80', 'backdrop-blur-md', 'py-4', 'shadow-2xl');
-                navbar.classList.remove('py-6');
+            if (window.scrollY > 30) {
+                navbar.classList.add('bg-slate-950/80', 'backdrop-blur-md', 'py-4', 'shadow-2xl', 'border-b', 'border-slate-900');
+                navbar.classList.remove('py-6', 'bg-slate-950/0');
             } else {
-                navbar.classList.remove('bg-slate-950/80', 'backdrop-blur-md', 'py-4', 'shadow-2xl');
-                navbar.classList.add('py-6');
+                navbar.classList.remove('bg-slate-950/80', 'backdrop-blur-md', 'py-4', 'shadow-2xl', 'border-b', 'border-slate-900');
+                navbar.classList.add('py-6', 'bg-slate-950/0');
             }
         });
 
@@ -202,6 +211,34 @@
         document.querySelectorAll('section').forEach(section => {
             section.classList.add('transition-all', 'duration-700', 'opacity-0', 'translate-y-10');
             observer.observe(section);
+        });
+
+        const menuBtn = document.getElementById('menu-btn');
+        const mobileMenu = document.getElementById('mobile-menu');
+        const menuIcon = document.getElementById('menu-icon');
+        const mobileLinks = document.querySelectorAll('.mobile-link');
+
+        menuBtn.addEventListener('click', () => {
+            if (mobileMenu.classList.contains('max-h-0')) {
+                mobileMenu.classList.remove('max-h-0', 'opacity-0', 'py-0');
+                mobileMenu.classList.add('max-h-64', 'opacity-100', 'py-4');
+                menuIcon.classList.add('rotate-90');
+                setTimeout(() => menuIcon.classList.replace('fa-bars', 'fa-times'), 150);
+            } else {
+                mobileMenu.classList.remove('max-h-64', 'opacity-100', 'py-4');
+                mobileMenu.classList.add('max-h-0', 'opacity-0', 'py-0');
+                menuIcon.classList.remove('rotate-90');
+                setTimeout(() => menuIcon.classList.replace('fa-times', 'fa-bars'), 150);
+            }
+        });
+
+        mobileLinks.forEach(link => {
+            link.addEventListener('click', () => {
+                mobileMenu.classList.remove('max-h-64', 'opacity-100', 'py-4');
+                mobileMenu.classList.add('max-h-0', 'opacity-0', 'py-0');
+                menuIcon.classList.remove('rotate-90');
+                menuIcon.classList.replace('fa-times', 'fa-bars');
+            });
         });
     </script>
 </body>
