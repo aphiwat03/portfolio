@@ -10,48 +10,58 @@
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
-    <script src="https://kit.fontawesome.com/64d58efce2.js" crossorigin="anonymous"></script>
     <style>
         body {
             font-family: 'Inter', sans-serif;
         }
 
         .glass-card {
-            background: rgba(255, 255, 255, 0.03);
+            background: rgba(15, 23, 42, 0.85);
             backdrop-filter: blur(10px);
-            border: 1px solid rgba(255, 255, 255, 0.1);
+            -webkit-backdrop-filter: blur(10px);
+            border: 1px solid rgba(255, 255, 255, 0.08);
         }
 
         .text-gradient {
             background: linear-gradient(to right, #60a5fa, #3b82f6, #2563eb);
             -webkit-background-clip: text;
             -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        #navbar .container {
+            padding-left: max(1.5rem, env(safe-area-inset-left));
+            padding-right: max(1.5rem, env(safe-area-inset-right));
+        }
+
+        #menu-btn {
+            min-width: 44px;
+            min-height: 44px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
         }
 
         .bg-gradient-blue {
             background: radial-gradient(circle at top right, #1e3a8a 0%, #0f172a 100%);
         }
 
-        .project-card:hover .project-overlay {
-            opacity: 1;
-        }
-
         @keyframes float {
             0% {
-                transform: translateY(0px);
+                transform: translateY(0px) rotate(0deg);
             }
 
             50% {
-                transform: translateY(-10px);
+                transform: translateY(-12px) rotate(1deg);
             }
 
             100% {
-                transform: translateY(0px);
+                transform: translateY(0px) rotate(0deg);
             }
         }
 
         .float-anim {
-            animation: float 3s ease-in-out infinite;
+            animation: float 4s ease-in-out infinite;
         }
 
         .hide-scrollbar::-webkit-scrollbar {
@@ -62,71 +72,111 @@
             -ms-overflow-style: none;
             scrollbar-width: none;
         }
+
+        .reveal {
+            opacity: 0;
+            transform: translateY(30px);
+            transition: opacity 0.8s cubic-bezier(0.2, 0.8, 0.2, 1), transform 0.8s cubic-bezier(0.2, 0.8, 0.2, 1);
+        }
+
+        .reveal.active {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        .delay-100 {
+            transition-delay: 100ms;
+        }
+
+        .delay-200 {
+            transition-delay: 200ms;
+        }
+
+        .delay-300 {
+            transition-delay: 300ms;
+        }
+
+        .delay-400 {
+            transition-delay: 400ms;
+        }
     </style>
 </head>
 
-<body class="bg-slate-950 text-slate-200 selection:bg-blue-500/30">
+<body class="bg-slate-950 text-slate-200 selection:bg-blue-500/30 overflow-x-hidden">
 
-    <nav id="navbar" class="fixed top-0 w-full z-50 transition-all duration-300 py-6">
+    <nav id="navbar" class="fixed top-0 w-full z-50 transition-all duration-300 py-6 bg-slate-950/0 text-white">
         <div class="container mx-auto px-6 flex justify-between items-center">
-            <div class="text-2xl font-bold tracking-tighter flex items-center gap-2">
-                <div class="w-8 h-8 bg-blue-600 rounded-lg flex items-center justify-center">
+            <div class="text-2xl font-bold tracking-tighter flex items-center gap-2 cursor-pointer">
+                <div
+                    class="w-8 h-8 bg-blue-600 rounded-lg flex items-center justify-center shadow-lg shadow-blue-500/30">
                     <span class="text-white text-sm">P</span>
                 </div>
                 <span>Portfolio</span>
             </div>
 
             <div class="hidden md:flex items-center space-x-8">
-                <a href="#home" class="hover:text-blue-400 transition-colors">Home</a>
-                <a href="#skills" class="hover:text-blue-400 transition-colors">Skills</a>
-                <a href="#projects" class="hover:text-blue-400 transition-colors">Projects</a>
-                <a href="#contact" class="hover:text-blue-400 transition-colors">Contact</a>
+                <a href="#home"
+                    class="relative after:absolute after:bottom-0 after:left-0 after:w-0 after:h-[2px] after:bg-blue-400 after:transition-all hover:after:w-full hover:text-blue-400 transition-colors py-1">Home</a>
+                <a href="#skills"
+                    class="relative after:absolute after:bottom-0 after:left-0 after:w-0 after:h-[2px] after:bg-blue-400 after:transition-all hover:after:w-full hover:text-blue-400 transition-colors py-1">Skills</a>
+                <a href="#projects"
+                    class="relative after:absolute after:bottom-0 after:left-0 after:w-0 after:h-[2px] after:bg-blue-400 after:transition-all hover:after:w-full hover:text-blue-400 transition-colors py-1">Projects</a>
+                <a href="#contact"
+                    class="relative after:absolute after:bottom-0 after:left-0 after:w-0 after:h-[2px] after:bg-blue-400 after:transition-all hover:after:w-full hover:text-blue-400 transition-colors py-1">Contact</a>
             </div>
 
-            <button class="md:hidden text-2xl" id="menu-btn">
-                <i class="fas fa-bars"></i>
+            <button class="md:hidden text-2xl focus:outline-none hover:text-blue-400 transition-colors" id="menu-btn">
+                <i class="fas fa-bars transition-transform duration-300" id="menu-icon"></i>
             </button>
+        </div>
+
+        <div id="mobile-menu"
+            class="md:hidden bg-slate-950/95 backdrop-blur-lg absolute top-full left-0 w-full border-t border-slate-900 flex flex-col space-y-4 shadow-2xl transition-all duration-300 ease-in-out max-h-0 opacity-0 overflow-hidden px-6 py-0">
+            <a href="#home" class="mobile-link text-lg hover:text-blue-400 transition-colors pt-4">Home</a>
+            <a href="#skills" class="mobile-link text-lg hover:text-blue-400 transition-colors">Skills</a>
+            <a href="#projects" class="mobile-link text-lg hover:text-blue-400 transition-colors">Projects</a>
+            <a href="#contact" class="mobile-link text-lg hover:text-blue-400 transition-colors pb-4">Contact</a>
         </div>
     </nav>
 
     <section id="home" class="relative min-h-screen flex items-center pt-20 overflow-hidden bg-gradient-blue">
         <div class="absolute inset-0 opacity-20 pointer-events-none">
-            <div class="absolute top-1/4 left-1/4 w-96 h-96 bg-blue-600 rounded-full blur-[120px]"></div>
-            <div class="absolute bottom-1/4 right-1/4 w-96 h-96 bg-indigo-600 rounded-full blur-[120px]"></div>
+            <div
+                class="absolute top-1/4 left-1/4 w-96 h-96 bg-blue-600 rounded-full blur-[120px] animate-pulse duration-[6000ms]">
+            </div>
+            <div
+                class="absolute bottom-1/4 right-1/4 w-96 h-96 bg-indigo-600 rounded-full blur-[120px] animate-pulse duration-[8000ms]">
+            </div>
         </div>
 
         <div class="container mx-auto px-6 relative z-10">
             <div class="flex flex-col lg:flex-row items-center justify-between gap-12">
-                <div class="max-w-2xl lg:w-1/2">
-                    <h2 class="text-blue-400 font-medium tracking-widest mb-4 uppercase text-sm">Welcome to my space
-                    </h2>
-                    <h1 class="text-5xl md:text-7xl font-bold mb-6 leading-tight">
+                <div class="max-w-2xl lg:w-1/2 reveal">
+                    <h2 class="text-blue-400 font-medium tracking-widest mb-4 uppercase text-sm tracking-widest">Welcome
+                        to my space</h2>
+                    <h1 class="text-4xl sm:text-5xl md:text-7xl font-bold mb-6 leading-tight">
                         I'm <span class="text-gradient">Aphiwat Phankham</span>
                     </h1>
-                    <p class="text-slate-400 text-lg md:text-xl mb-10 leading-relaxed">
+                    <p class="text-base sm:text-lg md:text-xl mb-8 text-slate-400 leading-relaxed">
                         Actively seeking a full-time Full-Stack Developer position. Experienced in building responsive,
                         user-centric web applications with a focus on writing clean, scalable code and delivering
                         high-quality digital solutions.
                     </p>
-                    <div class="flex flex-wrap gap-4">
+                    <div class="flex flex-wrap gap-3 sm:gap-4">
                         <a href="#projects"
-                            class="px-8 py-4 bg-blue-600 hover:bg-blue-700 text-white rounded-xl font-semibold transition-all flex items-center gap-2">
+                            class="px-6 py-3 sm:px-8 sm:py-4 bg-blue-600 hover:bg-blue-700 active:scale-95 text-white rounded-xl font-semibold transition-all flex items-center gap-2 shadow-lg shadow-blue-500/20">
                             View Projects <i class="fas fa-arrow-right text-sm"></i>
                         </a>
-                        <a href="#contact"
-                            class="px-8 py-4 border border-slate-700 hover:border-blue-500 rounded-xl font-semibold transition-all">
-                            Get In Touch
-                        </a>
-                        <a href="./assets/Aphiwat_CV.pdf" download
-                            class="px-8 py-4 border border-slate-700 hover:border-blue-500 hover:bg-slate-800 text-white rounded-xl font-semibold transition-all flex items-center gap-2">
+                        <a href="./assets/cv/CV.pdf" download target="_blank"
+                            class="px-6 py-3 sm:px-8 sm:py-4 border border-slate-700 hover:border-blue-500 hover:bg-slate-900 text-white rounded-xl font-semibold transition-all flex items-center gap-2">
                             <i class="fas fa-download text-sm"></i> Download CV
                         </a>
                     </div>
                 </div>
-                <div class="lg:w-1/2 flex justify-center lg:justify-end">
+                <div class="lg:w-1/2 flex justify-center lg:justify-end reveal delay-200">
                     <div
-                        class="relative w-72 h-72 md:w-96 md:h-96 rounded-full p-2 bg-gradient-to-tr from-blue-600 to-indigo-600 shadow-2xl shadow-blue-500/20 float-anim">
-                        <img src="./pic/6530301089.jpeg" alt="Profile"
+                        class="relative w-56 h-56 sm:w-72 sm:h-72 md:w-96 md:h-96 rounded-full p-2 bg-gradient-to-tr from-blue-600 to-indigo-600 shadow-2xl shadow-blue-500/20 float-anim">
+                        <img src="./assets/pic/6530301089.jpeg" alt="Profile"
                             class="w-full h-full object-cover rounded-full border-4 border-slate-900">
                     </div>
                 </div>
@@ -138,19 +188,16 @@
         </div>
     </section>
 
-    <section id="skills" class="py-24 bg-slate-900/50">
+    <section id="skills" class="py-24 bg-slate-900/40">
         <div class="container mx-auto px-6">
-            <div class="mb-16">
+            <div class="mb-16 reveal">
                 <h2 class="text-blue-400 font-medium mb-2 uppercase tracking-widest text-sm">Capabilities</h2>
                 <h3 class="text-4xl font-bold text-white">Skills & Expertise</h3>
             </div>
 
-            <!-- ปรับ Grid ให้รองรับ 4 คอลัมน์ -->
             <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
-
-                <!-- Frontend -->
                 <div
-                    class="glass-card p-8 rounded-2xl hover:-translate-y-1 transition-transform border border-slate-700/50">
+                    class="glass-card p-5 sm:p-8 rounded-2xl hover:-translate-y-2 hover:border-blue-500/40 hover:shadow-xl hover:shadow-blue-500/5 transition-all duration-300 reveal delay-100">
                     <h4 class="text-xl font-bold text-white mb-4 flex items-center gap-3">
                         <i class="fas fa-layer-group text-blue-500"></i> Frontend
                     </h4>
@@ -166,9 +213,8 @@
                     </div>
                 </div>
 
-                <!-- Backend -->
                 <div
-                    class="glass-card p-8 rounded-2xl hover:-translate-y-1 transition-transform border border-slate-700/50">
+                    class="glass-card p-5 sm:p-8 rounded-2xl hover:-translate-y-2 hover:border-blue-500/40 hover:shadow-xl hover:shadow-blue-500/5 transition-all duration-300 reveal delay-200">
                     <h4 class="text-xl font-bold text-white mb-4 flex items-center gap-3">
                         <i class="fas fa-server text-blue-500"></i> Backend
                     </h4>
@@ -182,9 +228,8 @@
                     </div>
                 </div>
 
-                <!-- Familiar / Others -->
                 <div
-                    class="glass-card p-8 rounded-2xl hover:-translate-y-1 transition-transform border border-slate-700/50">
+                    class="glass-card p-5 sm:p-8 rounded-2xl hover:-translate-y-2 hover:border-blue-500/40 hover:shadow-xl hover:shadow-blue-500/5 transition-all duration-300 reveal delay-300">
                     <h4 class="text-xl font-bold text-white mb-4 flex items-center gap-3">
                         <i class="fas fa-code-branch text-blue-500"></i> Familiar
                     </h4>
@@ -198,11 +243,10 @@
                     </div>
                 </div>
 
-                <!-- Learning -->
                 <div
-                    class="glass-card p-8 rounded-2xl hover:-translate-y-1 transition-transform border border-slate-700/50">
+                    class="glass-card p-5 sm:p-8 rounded-2xl hover:-translate-y-2 hover:border-amber-500/40 hover:shadow-xl hover:shadow-amber-500/5 transition-all duration-300 reveal delay-400">
                     <h4 class="text-xl font-bold text-white mb-4 flex items-center gap-3">
-                        <i class="fas fa-book-reader text-blue-500"></i> Learning
+                        <i class="fas fa-book-reader text-amber-500"></i> Learning
                     </h4>
                     <div class="text-slate-400 space-y-3">
                         <p class="flex items-center gap-2"><span class="w-1.5 h-1.5 bg-amber-500 rounded-full"></span>
@@ -211,39 +255,38 @@
                             Docker</p>
                     </div>
                 </div>
-
             </div>
         </div>
     </section>
 
     <section id="projects" class="py-24 bg-slate-950">
         <div class="container mx-auto px-6">
-            <div class="flex flex-col md:flex-row justify-between items-end mb-16 gap-6">
-                <div>
+            <div class="flex flex-col md:flex-row justify-between items-center md:items-end mb-16 gap-6 reveal">
+                <div class="text-center md:text-left">
                     <h2 class="text-blue-400 font-medium mb-2 uppercase tracking-widest text-sm">Portfolio</h2>
                     <h3 class="text-4xl font-bold text-white">Selected Works</h3>
                 </div>
                 <div class="flex gap-4">
                     <button id="btn-prev"
-                        class="w-12 h-12 rounded-full border border-slate-800 flex items-center justify-center text-white hover:bg-blue-600 hover:border-blue-600 transition-all">
+                        class="w-12 h-12 rounded-full border border-slate-800 flex items-center justify-center text-white hover:bg-blue-600 hover:border-blue-600 active:scale-90 transition-all">
                         <i class="fas fa-arrow-left"></i>
                     </button>
                     <button id="btn-next"
-                        class="w-12 h-12 rounded-full border border-slate-800 flex items-center justify-center text-white hover:bg-blue-600 hover:border-blue-600 transition-all">
+                        class="w-12 h-12 rounded-full border border-slate-800 flex items-center justify-center text-white hover:bg-blue-600 hover:border-blue-600 active:scale-90 transition-all">
                         <i class="fas fa-arrow-right"></i>
                     </button>
                 </div>
             </div>
 
-            <!-- Carousel Container -->
             <div id="carousel"
-                class="flex gap-8 overflow-x-auto snap-x snap-mandatory hide-scrollbar scroll-smooth pb-8">
-
-                <!-- Project 1: Frontend Mobile -->
+                class="flex gap-6 sm:gap-8 overflow-x-auto snap-x snap-mandatory hide-scrollbar scroll-smooth pb-8 reveal delay-100">
                 <a href="./projects/court-reservation-mobile.html"
-                    class="group project-card relative overflow-hidden rounded-2xl bg-slate-900 border border-slate-800 transition-all hover:-translate-y-2 shrink-0 w-full md:w-[calc(50%-1rem)] lg:w-[calc(33.333%-1.5rem)] snap-start block">
-                    <img src="https://placehold.co/600x400/1e293b/60a5fa?text=Mobile+App" alt="Frontend Mobile Project"
-                        class="w-full h-64 object-cover opacity-80 group-hover:scale-105 transition-transform duration-500">
+                    class="group project-card relative overflow-hidden rounded-2xl bg-slate-900/50 border border-slate-800/80 transition-all duration-300 hover:-translate-y-2 hover:border-blue-500/30 hover:shadow-2xl hover:shadow-blue-500/5 shrink-0 w-[85vw] sm:w-[80vw] md:w-[calc(50%-1rem)] lg:w-[calc(33.333%-1.5rem)] snap-start block">
+                    <div class="overflow-hidden h-64">
+                        <img src="https://placehold.co/600x400/1e293b/60a5fa?text=Mobile+App"
+                            alt="Frontend Mobile Project"
+                            class="w-full h-full object-cover opacity-80 group-hover:scale-105 group-hover:opacity-100 transition-all duration-500">
+                    </div>
                     <div class="p-6">
                         <span class="text-blue-400 text-xs font-semibold uppercase">Frontend Mobile</span>
                         <h4 class="text-xl font-bold text-white mt-1 mb-3">Court Reservation Mobile</h4>
@@ -256,36 +299,38 @@
                     </div>
                 </a>
 
-                <!-- Project 2: Computer Vision -->
                 <a href="./projects/basketball-detection.html"
-                    class="group project-card relative overflow-hidden rounded-2xl bg-slate-900 border border-slate-800 transition-all hover:-translate-y-2 shrink-0 w-full md:w-[calc(50%-1rem)] lg:w-[calc(33.333%-1.5rem)] snap-start block">
-                    <img src="https://placehold.co/600x400/1e293b/60a5fa?text=Computer+Vision"
-                        alt="Computer Vision Project"
-                        class="w-full h-64 object-cover opacity-80 group-hover:scale-105 transition-transform duration-500">
+                    class="group project-card relative overflow-hidden rounded-2xl bg-slate-900/50 border border-slate-800/80 transition-all duration-300 hover:-translate-y-2 hover:border-green-500/30 hover:shadow-2xl hover:shadow-green-500/5 shrink-0 w-[85vw] sm:w-[80vw] md:w-[calc(50%-1rem)] lg:w-[calc(33.333%-1.5rem)] snap-start block">
+                    <div class="overflow-hidden h-64">
+                        <img src="https://placehold.co/600x400/1e293b/60a5fa?text=Computer+Vision"
+                            alt="Computer Vision Project"
+                            class="w-full h-full object-cover opacity-80 group-hover:scale-105 group-hover:opacity-100 transition-all duration-500">
+                    </div>
                     <div class="p-6">
                         <span class="text-green-400 text-xs font-semibold uppercase">AI & Computer Vision
                             Developer</span>
                         <h4 class="text-xl font-bold text-white mt-1 mb-3">Basketball Detection </h4>
-                        <p class="text-slate-400 text-sm mb-4 leading-relaxed">
-                            ระบบ AI ตรวจจับและนับคะแนนบาสเกตบอลจากวิดีโอ</p>
+                        <p class="text-slate-400 text-sm mb-4 leading-relaxed">ระบบ AI
+                            ตรวจจับและนับคะแนนบาสเกตบอลจากวิดีโอ</p>
                         <div class="flex gap-2">
                             <span class="px-3 py-1 bg-slate-800 rounded-full text-xs text-slate-300">Python</span>
                             <span class="px-3 py-1 bg-slate-800 rounded-full text-xs text-slate-300">PyTorch</span>
                             <span class="px-3 py-1 bg-slate-800 rounded-full text-xs text-slate-300">YOLO</span>
-                            <span class="px-3 py-1 bg-slate-800 rounded-full text-xs text-slate-300">OpenCV</span>
                         </div>
                     </div>
                 </a>
 
-                <!-- Project 3: Internship (UX/UI Dev) -->
                 <a href="./projects/bitec-buri-projects.html"
-                    class="group project-card relative overflow-hidden rounded-2xl bg-slate-900 border border-slate-800 transition-all hover:-translate-y-2 shrink-0 w-full md:w-[calc(50%-1rem)] lg:w-[calc(33.333%-1.5rem)] snap-start block">
-                    <img src="https://placehold.co/600x400/1e293b/60a5fa?text=UX/UI+Internship" alt="Internship Project"
-                        class="w-full h-64 object-cover opacity-80 group-hover:scale-105 transition-transform duration-500">
+                    class="group project-card relative overflow-hidden rounded-2xl bg-slate-900/50 border border-slate-800/80 transition-all duration-300 hover:-translate-y-2 hover:border-purple-500/30 hover:shadow-2xl hover:shadow-purple-500/5 shrink-0 w-[85vw] sm:w-[80vw] md:w-[calc(50%-1rem)] lg:w-[calc(33.333%-1.5rem)] snap-start block">
+                    <div class="overflow-hidden h-64">
+                        <img src="https://placehold.co/600x400/1e293b/60a5fa?text=UX/UI+Internship"
+                            alt="Internship Project"
+                            class="w-full h-full object-cover opacity-80 group-hover:scale-105 group-hover:opacity-100 transition-all duration-500">
+                    </div>
                     <div class="p-6">
                         <span class="text-purple-400 text-xs font-semibold uppercase">Co-op Internship (UX/UI)</span>
                         <h4 class="text-xl font-bold text-white mt-1 mb-3">Bitec Buri Projects</h4>
-                        <p class="text-slate-400 text-sm mb-4 leading-relaxed">สหกิจศึกษา (17 พ.ย. 2025 - 31 มี.ค. 2026)
+                        <p class="text-slate-400 text-sm mb-4 leading-relaxed">สหกิจศึกษา
                             พัฒนาและออกแบบประสบการณ์ผู้ใช้งานสำหรับแพลตฟอร์มขององค์กร</p>
                         <div class="flex flex-wrap gap-2">
                             <span class="px-3 py-1 bg-slate-800 rounded-full text-xs text-slate-300">Figma</span>
@@ -294,39 +339,36 @@
                     </div>
                 </a>
 
-                <!-- Project 4: Full-Stack (Ongoing) -->
                 <a href="./projects/smart-butcher-shop.html"
-                    class="group project-card relative overflow-hidden rounded-2xl bg-slate-900 border border-blue-500 transition-all hover:-translate-y-2 shrink-0 w-full md:w-[calc(50%-1rem)] lg:w-[calc(33.333%-1.5rem)] snap-start ring-2 ring-blue-500/50 block">
-                    <img src="https://placehold.co/600x400/1e293b/60a5fa?text=Fullstack+(Ongoing)" alt="Ongoing Project"
-                        class="w-full h-64 object-cover opacity-80 group-hover:scale-105 transition-transform duration-500">
+                    class="group project-card relative overflow-hidden rounded-2xl bg-slate-900/60 border border-blue-500 transition-all duration-300 hover:-translate-y-2 ring-2 ring-blue-500/30 hover:ring-blue-500/60 hover:shadow-2xl hover:shadow-blue-500/10 shrink-0 w-[85vw] sm:w-[80vw] md:w-[calc(50%-1rem)] lg:w-[calc(33.333%-1.5rem)] snap-start block">
+                    <div class="overflow-hidden h-64 relative">
+                        <img src="https://placehold.co/600x400/1e293b/60a5fa?text=Fullstack+(Ongoing)"
+                            alt="Ongoing Project"
+                            class="w-full h-full object-cover opacity-80 group-hover:scale-105 group-hover:opacity-100 transition-all duration-500">
+                    </div>
                     <div class="p-6 relative">
                         <div class="absolute top-0 right-6 -translate-y-1/2">
                             <span
-                                class="bg-blue-500 text-white text-[10px] font-bold px-2 py-1 rounded-full animate-pulse">ONGOING</span>
+                                class="bg-blue-500 text-white text-[10px] font-bold px-2.5 py-1 rounded-full animate-pulse shadow-md shadow-blue-500/50">ONGOING</span>
                         </div>
                         <span class="text-orange-400 text-xs font-semibold uppercase">Full-Stack Development</span>
                         <h4 class="text-xl font-bold text-white mt-1 mb-3">Smart Butcher Marketplace</h4>
-                        <p class="text-slate-400 text-sm mb-4 leading-relaxed">
-                            แพลตฟอร์มมาร์เก็ตเพลสครบวงจร ปัจจุบันอยู่ระหว่างการพัฒนาระบบ Frontend, Backend Architecture
-                            และ RAG AI Chat
-                        </p>
+                        <p class="text-slate-400 text-sm mb-4 leading-relaxed">แพลตฟอร์มมาร์เก็ตเพลสครบวงจร พัฒนาระบบ
+                            Frontend, Backend และ RAG AI Chat</p>
                         <div class="flex flex-wrap gap-2">
-                            <span class="px-3 py-1 bg-slate-800 rounded-full text-xs text-slate-300">Figma</span>
                             <span class="px-3 py-1 bg-slate-800 rounded-full text-xs text-slate-300">Next.js</span>
                             <span class="px-3 py-1 bg-slate-800 rounded-full text-xs text-slate-300">NestJS</span>
-                            <span class="px-3 py-1 bg-slate-800 rounded-full text-xs text-slate-300">Prisma</span>
                             <span class="px-3 py-1 bg-slate-800 rounded-full text-xs text-slate-300">PostgreSQL</span>
                         </div>
                     </div>
                 </a>
-
             </div>
         </div>
     </section>
 
-    <section id="contact" class="py-24 bg-slate-900/30">
+    <section id="contact" class="py-24 bg-slate-900/20">
         <div class="container mx-auto px-6">
-            <div class="max-w-2xl mx-auto text-center mb-16">
+            <div class="max-w-2xl mx-auto text-center mb-16 reveal">
                 <h2 class="text-blue-400 font-medium mb-2 uppercase tracking-widest text-sm">Get In Touch</h2>
                 <h3 class="text-4xl font-bold text-white mb-6">Let's Connect</h3>
                 <p class="text-slate-400 text-lg">
@@ -335,105 +377,83 @@
                 </p>
             </div>
 
-            <div class="flex flex-col md:flex-row justify-center items-center gap-6 md:gap-12">
-                <!-- Email -->
+            <div
+                class="flex flex-col sm:flex-row justify-center items-stretch gap-4 sm:gap-6 md:gap-12 reveal delay-200">
                 <a href="mailto:aphiwat240846@gmail.com"
-                    class="group flex flex-col items-center gap-4 p-8 glass-card rounded-2xl w-full md:w-64 hover:-translate-y-2 transition-transform border border-slate-700/50 hover:border-blue-500/50">
+                    class="group flex flex-row sm:flex-col items-center gap-4 p-6 sm:p-8 glass-card rounded-2xl w-full sm:w-48 md:w-64 hover:-translate-y-2 transition-all duration-300 hover:border-blue-500/40 hover:shadow-xl hover:shadow-blue-500/5">
                     <div
-                        class="w-16 h-16 bg-blue-500/10 rounded-full flex items-center justify-center group-hover:bg-blue-500/20 transition-colors">
-                        <i class="fas fa-envelope text-2xl text-blue-400"></i>
+                        class="w-12 h-12 sm:w-16 sm:h-16 bg-blue-500/10 rounded-full flex items-center justify-center shrink-0 group-hover:bg-blue-500/20 transition-all duration-300 group-hover:scale-110">
+                        <i class="fas fa-envelope text-xl sm:text-2xl text-blue-400"></i>
                     </div>
-
-                    <div class="text-center">
+                    <div class="sm:text-center">
                         <h4 class="text-white font-bold mb-1">Email</h4>
-                        <p class="text-sm text-slate-400">Drop me a line</p>
+                        <p class="text-sm text-slate-400">Contact me</p>
                     </div>
                 </a>
 
-                <!-- GitHub -->
                 <a href="https://github.com/aphiwat03" target="_blank" rel="noopener noreferrer"
-                    class="group flex flex-col items-center gap-4 p-8 glass-card rounded-2xl w-full md:w-64 hover:-translate-y-2 transition-transform border border-slate-700/50 hover:border-slate-500/50">
+                    class="group flex flex-row sm:flex-col items-center gap-4 p-6 sm:p-8 glass-card rounded-2xl w-full sm:w-48 md:w-64 hover:-translate-y-2 transition-all duration-300 hover:border-slate-500/40 hover:shadow-xl hover:shadow-slate-500/5">
                     <div
-                        class="w-16 h-16 bg-gray-500/10 rounded-full flex items-center justify-center group-hover:bg-gray-500/20 transition-colors">
-                        <i class="fab fa-github text-2xl text-gray-300"></i>
+                        class="w-12 h-12 sm:w-16 sm:h-16 bg-gray-500/10 rounded-full flex items-center justify-center shrink-0 group-hover:bg-gray-500/20 transition-all duration-300 group-hover:scale-110">
+                        <i class="fab fa-github text-xl sm:text-2xl text-gray-300"></i>
                     </div>
-                    <div class="text-center">
+                    <div class="sm:text-center">
                         <h4 class="text-white font-bold mb-1">GitHub</h4>
-                        <p class="text-sm text-slate-400">Check my code</p>
+                        <p class="text-sm text-slate-400">View my projects</p>
                     </div>
                 </a>
 
-                <!-- LinkedIn -->
                 <a href="https://www.linkedin.com/in/aphiwat-phankham/" target="_blank" rel="noopener noreferrer"
-                    class="group flex flex-col items-center gap-4 p-8 glass-card rounded-2xl w-full md:w-64 hover:-translate-y-2 transition-transform border border-slate-700/50 hover:border-blue-600/50">
+                    class="group flex flex-row sm:flex-col items-center gap-4 p-6 sm:p-8 glass-card rounded-2xl w-full sm:w-48 md:w-64 hover:-translate-y-2 transition-all duration-300 hover:border-blue-600/40 hover:shadow-xl hover:shadow-blue-600/5">
                     <div
-                        class="w-16 h-16 bg-blue-600/10 rounded-full flex items-center justify-center group-hover:bg-blue-600/20 transition-colors">
-                        <i class="fab fa-linkedin-in text-2xl text-blue-500"></i>
+                        class="w-12 h-12 sm:w-16 sm:h-16 bg-blue-600/10 rounded-full flex items-center justify-center shrink-0 group-hover:bg-blue-600/20 transition-all duration-300 group-hover:scale-110">
+                        <i class="fab fa-linkedin-in text-xl sm:text-2xl text-blue-500"></i>
                     </div>
-                    <div class="text-center">
+                    <div class="sm:text-center">
                         <h4 class="text-white font-bold mb-1">LinkedIn</h4>
-                        <p class="text-sm text-slate-400">Professional profile</p>
+                        <p class="text-sm text-slate-400">Connect with me</p>
                     </div>
                 </a>
             </div>
         </div>
     </section>
 
-    <footer class="py-12 border-t border-slate-900">
+    <footer class="py-12 border-t border-slate-900 bg-slate-950">
         <div class="container mx-auto px-6 flex flex-col md:flex-row justify-between items-center gap-6">
-            <p class="text-slate-500 text-sm">&copy; 2026 Aphiwat Phankham. </p>
+            <p class="text-slate-500 text-sm">&copy; 2026 Aphiwat Phankham.</p>
         </div>
     </footer>
 
     <script>
-        /* Navbar scroll effect */
         const navbar = document.getElementById('navbar');
         window.addEventListener('scroll', () => {
-            if (window.scrollY > 50) {
-                navbar.classList.add('bg-slate-950/80', 'backdrop-blur-md', 'py-4', 'shadow-2xl');
-                navbar.classList.remove('py-6');
+            if (window.scrollY > 30) {
+                navbar.classList.add('bg-slate-950/80', 'backdrop-blur-md', 'py-4', 'shadow-2xl', 'border-b', 'border-slate-900');
+                navbar.classList.remove('py-6', 'bg-slate-950/0');
             } else {
-                navbar.classList.remove('bg-slate-950/80', 'backdrop-blur-md', 'py-4', 'shadow-2xl');
-                navbar.classList.add('py-6');
+                navbar.classList.remove('bg-slate-950/80', 'backdrop-blur-md', 'py-4', 'shadow-2xl', 'border-b', 'border-slate-900');
+                navbar.classList.add('py-6', 'bg-slate-950/0');
             }
         });
 
-        /* Form Submission Mock */
-        function handleFormSubmit() {
-            const btn = document.querySelector('#contact-form button');
-            const success = document.getElementById('success-msg');
-            const form = document.getElementById('contact-form');
-
-            btn.innerHTML = '<i class="fas fa-spinner fa-spin"></i> Sending...';
-            btn.disabled = true;
-
-            // Simulate network request
-            setTimeout(() => {
-                form.classList.add('hidden');
-                success.classList.remove('hidden');
-            }, 1500);
-        }
-
-        /* Simple Reveal on Scroll */
         const observerOptions = {
-            threshold: 0.1
+            root: null,
+            threshold: 0.05,
+            rootMargin: "0px 0px -50px 0px"
         };
 
         const observer = new IntersectionObserver((entries) => {
             entries.forEach(entry => {
                 if (entry.isIntersecting) {
-                    entry.target.classList.add('opacity-100', 'translate-y-0');
-                    entry.target.classList.remove('opacity-0', 'translate-y-10');
+                    entry.target.classList.add('active');
                 }
             });
         }, observerOptions);
 
-        document.querySelectorAll('section').forEach(section => {
-            section.classList.add('transition-all', 'duration-700', 'opacity-0', 'translate-y-10');
-            observer.observe(section);
+        document.querySelectorAll('.reveal').forEach(element => {
+            observer.observe(element);
         });
-    </script>
-    <script>
+
         document.addEventListener('DOMContentLoaded', function () {
             const carousel = document.getElementById('carousel');
             const btnPrev = document.getElementById('btn-prev');
@@ -450,6 +470,36 @@
 
             btnNext.addEventListener('click', () => {
                 carousel.scrollBy({ left: scrollAmount(), behavior: 'smooth' });
+            });
+        });
+
+        const menuBtn = document.getElementById('menu-btn');
+        const mobileMenu = document.getElementById('mobile-menu');
+        const menuIcon = document.getElementById('menu-icon');
+        const mobileLinks = document.querySelectorAll('.mobile-link');
+
+        menuBtn.addEventListener('click', () => {
+            if (mobileMenu.classList.contains('max-h-0')) {
+                // Open menu
+                mobileMenu.classList.remove('max-h-0', 'opacity-0', 'py-0');
+                mobileMenu.classList.add('max-h-64', 'opacity-100', 'py-4');
+                menuIcon.classList.add('rotate-90');
+                setTimeout(() => menuIcon.classList.replace('fa-bars', 'fa-times'), 150);
+            } else {
+                // Close menu
+                mobileMenu.classList.remove('max-h-64', 'opacity-100', 'py-4');
+                mobileMenu.classList.add('max-h-0', 'opacity-0', 'py-0');
+                menuIcon.classList.remove('rotate-90');
+                setTimeout(() => menuIcon.classList.replace('fa-times', 'fa-bars'), 150);
+            }
+        });
+
+        mobileLinks.forEach(link => {
+            link.addEventListener('click', () => {
+                mobileMenu.classList.remove('max-h-64', 'opacity-100', 'py-4');
+                mobileMenu.classList.add('max-h-0', 'opacity-0', 'py-0');
+                menuIcon.classList.remove('rotate-90');
+                menuIcon.classList.replace('fa-times', 'fa-bars');
             });
         });
     </script>
