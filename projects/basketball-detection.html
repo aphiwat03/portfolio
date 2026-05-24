@@ -1,246 +1,358 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="en" class="scroll-smooth">
-
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Project - Defect Detection AI</title>
     <script src="https://cdn.tailwindcss.com"></script>
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap"
+      rel="stylesheet"
+    />
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css"
+    />
     <style>
-        body {
-            font-family: 'Inter', sans-serif;
+      body {
+        font-family: "Inter", sans-serif;
+      }
+
+      .glass-card {
+        background: rgba(255, 255, 255, 0.03);
+        backdrop-filter: blur(10px);
+        border: 1px solid rgba(255, 255, 255, 0.1);
+      }
+
+      .text-gradient {
+        background: linear-gradient(to right, #60a5fa, #3b82f6, #2563eb);
+        -webkit-background-clip: text;
+        -webkit-text-fill-color: transparent;
+      }
+
+      .bg-gradient-blue {
+        background: radial-gradient(
+          circle at top right,
+          #1e3a8a 0%,
+          #0f172a 100%
+        );
+      }
+
+      @keyframes float {
+        0% {
+          transform: translateY(0px);
         }
 
-        .glass-card {
-            background: rgba(255, 255, 255, 0.03);
-            backdrop-filter: blur(10px);
-            border: 1px solid rgba(255, 255, 255, 0.1);
+        50% {
+          transform: translateY(-10px);
         }
 
-        .text-gradient {
-            background: linear-gradient(to right, #60a5fa, #3b82f6, #2563eb);
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
+        100% {
+          transform: translateY(0px);
         }
+      }
 
-        .bg-gradient-blue {
-            background: radial-gradient(circle at top right, #1e3a8a 0%, #0f172a 100%);
+      .float-anim {
+        animation: float 3s ease-in-out infinite;
+      }
+
+      @media (min-width: 768px) {
+        #menu-btn {
+          display: none;
         }
-
-        @keyframes float {
-            0% {
-                transform: translateY(0px);
-            }
-
-            50% {
-                transform: translateY(-10px);
-            }
-
-            100% {
-                transform: translateY(0px);
-            }
-        }
-
-        .float-anim {
-            animation: float 3s ease-in-out infinite;
-        }
+      }
     </style>
-</head>
+  </head>
 
-<body class="bg-slate-950 text-slate-200 selection:bg-blue-500/30">
+  <body class="bg-slate-950 text-slate-200 selection:bg-blue-500/30">
+    <nav
+      id="navbar"
+      class="fixed top-0 w-full z-50 transition-all duration-300 py-6"
+    >
+      <div class="container mx-auto px-6 flex justify-between items-center">
+        <a
+          href="../index.html"
+          class="text-2xl font-bold tracking-tighter flex items-center gap-2 hover:opacity-80 transition-opacity"
+        >
+          <div
+            class="w-8 h-8 bg-blue-600 rounded-lg flex items-center justify-center"
+          >
+            <span class="text-white text-sm">P</span>
+          </div>
+          <span>Portfolio</span>
+        </a>
 
-    <nav id="navbar" class="fixed top-0 w-full z-50 transition-all duration-300 py-6">
-        <div class="container mx-auto px-6 flex justify-between items-center">
-            <a href="../index.html"
-                class="text-2xl font-bold tracking-tighter flex items-center gap-2 hover:opacity-80 transition-opacity">
-                <div class="w-8 h-8 bg-blue-600 rounded-lg flex items-center justify-center">
-                    <span class="text-white text-sm">P</span>
-                </div>
-                <span>Portfolio</span>
-            </a>
-
-            <div class="hidden md:flex items-center space-x-8">
-                <a href="#project-header" class="hover:text-blue-400 transition-colors">Overview</a>
-                <a href="#project-details" class="hover:text-blue-400 transition-colors">Project Detail</a>
-                <a href="#project-insights" class="hover:text-blue-400 transition-colors">Insights</a>
-            </div>
-
-            <button class="md:hidden text-2xl focus:outline-none hover:text-blue-400 transition-colors" id="menu-btn">
-                <i class="fas fa-bars transition-transform duration-300" id="menu-icon"></i>
-            </button>
+        <div class="hidden md:flex items-center space-x-8">
+          <a
+            href="#project-header"
+            class="hover:text-blue-400 transition-colors"
+            >Overview</a
+          >
+          <a
+            href="#project-details"
+            class="hover:text-blue-400 transition-colors"
+            >Project Detail</a
+          >
+          <a
+            href="#project-insights"
+            class="hover:text-blue-400 transition-colors"
+            >Insights</a
+          >
         </div>
 
-        <div id="mobile-menu"
-            class="md:hidden bg-slate-950/95 backdrop-blur-lg absolute top-full left-0 w-full border-t border-slate-900 flex flex-col space-y-4 shadow-2xl transition-all duration-300 ease-in-out max-h-0 opacity-0 overflow-hidden px-6 py-0">
-            <a href="#project-header"
-                class="mobile-link text-lg hover:text-blue-400 transition-colors pt-4">Overview</a>
-            <a href="#project-details" class="mobile-link text-lg hover:text-blue-400 transition-colors">Project
-                Detail</a>
-            <a href="#project-insights"
-                class="mobile-link text-lg hover:text-blue-400 transition-colors pb-4">Insights</a>
-        </div>
+        <button
+          class="md:hidden text-2xl focus:outline-none hover:text-blue-400 transition-colors"
+          id="menu-btn"
+        >
+          <i
+            class="fas fa-bars transition-transform duration-300"
+            id="menu-icon"
+          ></i>
+        </button>
+      </div>
+
+      <div
+        id="mobile-menu"
+        class="md:hidden bg-slate-950/95 backdrop-blur-lg absolute top-full left-0 w-full border-t border-slate-900 flex flex-col space-y-4 shadow-2xl transition-all duration-300 ease-in-out max-h-0 opacity-0 overflow-hidden px-6 py-0"
+      >
+        <a
+          href="#project-header"
+          class="mobile-link text-lg hover:text-blue-400 transition-colors pt-4"
+          >Overview</a
+        >
+        <a
+          href="#project-details"
+          class="mobile-link text-lg hover:text-blue-400 transition-colors"
+          >Project Detail</a
+        >
+        <a
+          href="#project-insights"
+          class="mobile-link text-lg hover:text-blue-400 transition-colors pb-4"
+          >Insights</a
+        >
+      </div>
     </nav>
 
     <!-- Section 1: Project Header -->
-    <section id="project-header" class="relative min-h-[60vh] flex items-center pt-20 overflow-hidden bg-gradient-blue">
-        <div class="container mx-auto px-6 relative z-10">
-            <div class="max-w-3xl">
-                <h2 class="text-blue-400 font-medium tracking-widest mb-4 uppercase text-sm">Project Overview</h2>
-                <h1 class="text-5xl md:text-6xl font-bold mb-6 leading-tight">
-                    <span class="text-gradient">BasketBall Detection</span> AI
-                </h1>
-                <p class="text-slate-400 text-lg md:text-xl mb-10 leading-relaxed">
-                    ระบบการนับคะแนนบาสเกตบอลอัตโนมัติที่ใช้เทคโนโลยีปัญญาประดิษฐ์ในการตรวจจับและนับคะแนนจากวิดีโอการแข่งขัน
-                </p>
-            </div>
+    <section
+      id="project-header"
+      class="relative min-h-[60vh] flex items-center pt-20 overflow-hidden bg-gradient-blue"
+    >
+      <div class="container mx-auto px-6 relative z-10">
+        <div class="max-w-3xl">
+          <h2
+            class="text-blue-400 font-medium tracking-widest mb-4 uppercase text-sm"
+          >
+            Project Overview
+          </h2>
+          <h1 class="text-5xl md:text-6xl font-bold mb-6 leading-tight">
+            <span class="text-gradient">BasketBall Detection</span> AI
+          </h1>
+          <p class="text-slate-400 text-lg md:text-xl mb-10 leading-relaxed">
+            ระบบการนับคะแนนบาสเกตบอลอัตโนมัติที่ใช้เทคโนโลยีปัญญาประดิษฐ์ในการตรวจจับและนับคะแนนจากวิดีโอการแข่งขัน
+          </p>
         </div>
+      </div>
     </section>
 
     <!-- Section 2: Project Details -->
     <section id="project-details" class="py-24 bg-slate-900/50">
-        <div class="container mx-auto px-6">
-            <div class="mb-16">
-                <h2 class="text-blue-400 font-medium mb-2 uppercase tracking-widest text-sm">Deep Dive</h2>
-                <h3 class="text-4xl font-bold text-white mb-6">About The Project</h3>
+      <div class="container mx-auto px-6">
+        <div class="mb-16">
+          <h2
+            class="text-blue-400 font-medium mb-2 uppercase tracking-widest text-sm"
+          >
+            Deep Dive
+          </h2>
+          <h3 class="text-4xl font-bold text-white mb-6">About The Project</h3>
 
-                <p class="text-slate-400 text-lg leading-relaxed max-w-4xl">
-                    BasketBall Detection คือระบบ AI สำหรับนับคะแนนบาสเกตบอลแบบ 1vs1 อัตโนมัติ
-                    ที่รองรับการทำงานทั้งจากไฟล์วิดีโอและกล้อง Webcam แบบเรียลไทม์ ตัวระบบจะแยกแยะผู้เล่นผ่านสีเสื้อ
-                    และประมวลผลการทำแต้มของแต่ละคนได้อย่างแม่นยำและรวดเร็ว ช่วยลดภาระและข้อผิดพลาดในการตัดสิน
-                </p>
-            </div>
-
-            <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
-                <div class="glass-card p-8 rounded-2xl border border-slate-700/50">
-                    <h4 class="text-xl font-bold text-white mb-4">Key Features</h4>
-                    <ul class="text-slate-400 space-y-3">
-                        <li>• Automated 2-Point & 3-Point Scoring</li>
-                        <li>• Player Differentiation via Shirt Color</li>
-                        <li>• Ball Trajectory Visualization</li>
-                        <li>• Real-time Webcam & Video Support</li>
-                    </ul>
-                </div>
-                <div class="glass-card p-8 rounded-2xl border border-slate-700/50">
-                    <h4 class="text-xl font-bold text-white mb-4">Tech Stack</h4>
-                    <ul class="text-slate-400 space-y-3">
-                        <li>• OpenCV</li>
-                        <li>• PyTorch</li>
-                        <li>• YOLO</li>
-                        <li>• Python</li>
-                    </ul>
-                </div>
-            </div>
+          <p class="text-slate-400 text-lg leading-relaxed max-w-4xl">
+            BasketBall Detection คือระบบ AI สำหรับนับคะแนนบาสเกตบอลแบบ 1vs1
+            อัตโนมัติ ที่รองรับการทำงานทั้งจากไฟล์วิดีโอและกล้อง Webcam
+            แบบเรียลไทม์ ตัวระบบจะแยกแยะผู้เล่นผ่านสีเสื้อ
+            และประมวลผลการทำแต้มของแต่ละคนได้อย่างแม่นยำและรวดเร็ว
+            ช่วยลดภาระและข้อผิดพลาดในการตัดสิน
+          </p>
         </div>
+
+        <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
+          <div class="glass-card p-8 rounded-2xl border border-slate-700/50">
+            <h4 class="text-xl font-bold text-white mb-4">Key Features</h4>
+            <ul class="text-slate-400 space-y-3">
+              <li>• Automated 2-Point & 3-Point Scoring</li>
+              <li>• Player Differentiation via Shirt Color</li>
+              <li>• Ball Trajectory Visualization</li>
+              <li>• Real-time Webcam & Video Support</li>
+            </ul>
+          </div>
+          <div class="glass-card p-8 rounded-2xl border border-slate-700/50">
+            <h4 class="text-xl font-bold text-white mb-4">Tech Stack</h4>
+            <ul class="text-slate-400 space-y-3">
+              <li>• OpenCV</li>
+              <li>• PyTorch</li>
+              <li>• YOLO</li>
+              <li>• Python</li>
+            </ul>
+          </div>
+        </div>
+      </div>
     </section>
 
     <!-- Section 3: Project Insights -->
     <section id="project-insights" class="py-24">
-        <div class="container mx-auto px-6">
-            <div class="mb-16">
-                <h2 class="text-blue-400 font-medium mb-2 uppercase tracking-widest text-sm">Experience</h2>
-                <h3 class="text-4xl font-bold text-white">Insights & Links</h3>
-            </div>
-            <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
-                <div
-                    class="glass-card p-8 rounded-2xl border border-slate-700/50 hover:-translate-y-2 transition-transform duration-300">
-                    <h4 class="text-xl font-bold text-white mb-4"><i class="fas fa-user-tag mr-2 text-blue-400"></i>My
-                        Role</h4>
-                    <p class="text-blue-300 font-semibold mb-3">AI & Computer Vision Developer</p>
-                    <ul class="text-slate-400 space-y-2 text-sm leading-relaxed mb-6">
-                        <li>• รวบรวม Dataset (รูปภาพจากอินเทอร์เน็ตและถ่ายเอง) สำหรับใช้สอน AI</li>
-                        <li>• เทรนโมเดล YOLO สำหรับตรวจจับลูกบาส แป้นบาส และผู้เล่น</li>
-                        <li>• พัฒนาลอจิก (Logic) ประมวลผลวิดีโอด้วย OpenCV</li>
-                        <li>• เขียนอัลกอริทึมคำนวณระยะการยิงและแยกแยะสีเสื้อผู้เล่น</li>
-                    </ul>
-
-                    <h4 class="text-xl font-bold text-white mb-4"><i class="fas fa-link mr-2 text-blue-400"></i>Links
-                    </h4>
-                    <a href="https://github.com/aphiwat03/Basketball-Game-Analyzer" target="_blank"
-                        class="inline-flex items-center gap-2 text-blue-400 hover:text-blue-300 transition-colors">
-                        <i class="fab fa-github text-xl"></i> GitHub Repository
-                    </a>
-                </div>
-                <div
-                    class="glass-card p-8 rounded-2xl border border-slate-700/50 hover:-translate-y-2 transition-transform duration-300">
-                    <h4 class="text-xl font-bold text-white mb-4">
-                        <i class="fas fa-lightbulb mr-2 text-blue-400"></i>Challenges / Lessons Learned
-                    </h4>
-                    <ul class="text-slate-400 space-y-3 leading-relaxed">
-                        <li>• <b>การเรียนรู้จากศูนย์:</b> ศึกษาภาษา Python และไลบรารี OpenCV
-                            ด้วยตัวเองเพื่อนำมาใช้ประมวลผลวิดีโอและสร้างอัลกอริทึม</li>
-                        <li>• <b>เรียนรู้การทำData:</b> ศึกษา Label ข้อมูลด้วยตัวเอง
-                            และลองผิดลองถูกในการเทรนโมเดลเพื่อให้ AI ตรวจจับได้แม่นยำที่สุด</li>
-                    </ul>
-                </div>
-            </div>
+      <div class="container mx-auto px-6">
+        <div class="mb-16">
+          <h2
+            class="text-blue-400 font-medium mb-2 uppercase tracking-widest text-sm"
+          >
+            Experience
+          </h2>
+          <h3 class="text-4xl font-bold text-white">Insights & Links</h3>
         </div>
+        <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
+          <div
+            class="glass-card p-8 rounded-2xl border border-slate-700/50 hover:-translate-y-2 transition-transform duration-300"
+          >
+            <h4 class="text-xl font-bold text-white mb-4">
+              <i class="fas fa-user-tag mr-2 text-blue-400"></i>My Role
+            </h4>
+            <p class="text-blue-300 font-semibold mb-3">
+              AI & Computer Vision Developer
+            </p>
+            <ul class="text-slate-400 space-y-2 text-sm leading-relaxed mb-6">
+              <li>
+                • รวบรวม Dataset (รูปภาพจากอินเทอร์เน็ตและถ่ายเอง) สำหรับใช้สอน
+                AI
+              </li>
+              <li>• เทรนโมเดล YOLO สำหรับตรวจจับลูกบาส แป้นบาส และผู้เล่น</li>
+              <li>• พัฒนาลอจิก (Logic) ประมวลผลวิดีโอด้วย OpenCV</li>
+              <li>• เขียนอัลกอริทึมคำนวณระยะการยิงและแยกแยะสีเสื้อผู้เล่น</li>
+            </ul>
+
+            <h4 class="text-xl font-bold text-white mb-4">
+              <i class="fas fa-link mr-2 text-blue-400"></i>Links
+            </h4>
+            <a
+              href="https://github.com/aphiwat03/Basketball-Game-Analyzer"
+              target="_blank"
+              class="inline-flex items-center gap-2 text-blue-400 hover:text-blue-300 transition-colors"
+            >
+              <i class="fab fa-github text-xl"></i> GitHub Repository
+            </a>
+          </div>
+          <div
+            class="glass-card p-8 rounded-2xl border border-slate-700/50 hover:-translate-y-2 transition-transform duration-300"
+          >
+            <h4 class="text-xl font-bold text-white mb-4">
+              <i class="fas fa-lightbulb mr-2 text-blue-400"></i>Challenges /
+              Lessons Learned
+            </h4>
+            <ul class="text-slate-400 space-y-3 leading-relaxed">
+              <li>
+                • <b>การเรียนรู้จากศูนย์:</b> ศึกษาภาษา Python และไลบรารี OpenCV
+                ด้วยตัวเองเพื่อนำมาใช้ประมวลผลวิดีโอและสร้างอัลกอริทึม
+              </li>
+              <li>
+                • <b>เรียนรู้การทำData:</b> ศึกษา Label ข้อมูลด้วยตัวเอง
+                และลองผิดลองถูกในการเทรนโมเดลเพื่อให้ AI ตรวจจับได้แม่นยำที่สุด
+              </li>
+            </ul>
+          </div>
+        </div>
+      </div>
     </section>
 
     <footer class="py-12 border-t border-slate-900">
-        <div class="container mx-auto px-6 flex flex-col md:flex-row justify-between items-center gap-6">
-            <p class="text-slate-500 text-sm">© 2026 Aphiwat Phankham. All rights reserved.</p>
-        </div>
+      <div
+        class="container mx-auto px-6 flex flex-col md:flex-row justify-between items-center gap-6"
+      >
+        <p class="text-slate-500 text-sm">
+          © 2026 Aphiwat Phankham. All rights reserved.
+        </p>
+      </div>
     </footer>
 
     <script>
-        const navbar = document.getElementById('navbar');
-        window.addEventListener('scroll', () => {
-            if (window.scrollY > 30) {
-                navbar.classList.add('bg-slate-950/80', 'backdrop-blur-md', 'py-4', 'shadow-2xl', 'border-b', 'border-slate-900');
-                navbar.classList.remove('py-6', 'bg-slate-950/0');
-            } else {
-                navbar.classList.remove('bg-slate-950/80', 'backdrop-blur-md', 'py-4', 'shadow-2xl', 'border-b', 'border-slate-900');
-                navbar.classList.add('py-6', 'bg-slate-950/0');
-            }
+      const navbar = document.getElementById("navbar");
+      window.addEventListener("scroll", () => {
+        if (window.scrollY > 30) {
+          navbar.classList.add(
+            "bg-slate-950/80",
+            "backdrop-blur-md",
+            "py-4",
+            "shadow-2xl",
+            "border-b",
+            "border-slate-900",
+          );
+          navbar.classList.remove("py-6", "bg-slate-950/0");
+        } else {
+          navbar.classList.remove(
+            "bg-slate-950/80",
+            "backdrop-blur-md",
+            "py-4",
+            "shadow-2xl",
+            "border-b",
+            "border-slate-900",
+          );
+          navbar.classList.add("py-6", "bg-slate-950/0");
+        }
+      });
+
+      const observerOptions = { threshold: 0.1 };
+      const observer = new IntersectionObserver((entries) => {
+        entries.forEach((entry) => {
+          if (entry.isIntersecting) {
+            entry.target.classList.add("opacity-100", "translate-y-0");
+            entry.target.classList.remove("opacity-0", "translate-y-10");
+          }
         });
+      }, observerOptions);
 
-        const observerOptions = { threshold: 0.1 };
-        const observer = new IntersectionObserver((entries) => {
-            entries.forEach(entry => {
-                if (entry.isIntersecting) {
-                    entry.target.classList.add('opacity-100', 'translate-y-0');
-                    entry.target.classList.remove('opacity-0', 'translate-y-10');
-                }
-            });
-        }, observerOptions);
+      document.querySelectorAll("section").forEach((section) => {
+        section.classList.add(
+          "transition-all",
+          "duration-700",
+          "opacity-0",
+          "translate-y-10",
+        );
+        observer.observe(section);
+      });
 
-        document.querySelectorAll('section').forEach(section => {
-            section.classList.add('transition-all', 'duration-700', 'opacity-0', 'translate-y-10');
-            observer.observe(section);
+      const menuBtn = document.getElementById("menu-btn");
+      const mobileMenu = document.getElementById("mobile-menu");
+      const menuIcon = document.getElementById("menu-icon");
+      const mobileLinks = document.querySelectorAll(".mobile-link");
+
+      menuBtn.addEventListener("click", () => {
+        if (mobileMenu.classList.contains("max-h-0")) {
+          mobileMenu.classList.remove("max-h-0", "opacity-0", "py-0");
+          mobileMenu.classList.add("max-h-64", "opacity-100", "py-4");
+          menuIcon.classList.add("rotate-90");
+          setTimeout(
+            () => menuIcon.classList.replace("fa-bars", "fa-times"),
+            150,
+          );
+        } else {
+          mobileMenu.classList.remove("max-h-64", "opacity-100", "py-4");
+          mobileMenu.classList.add("max-h-0", "opacity-0", "py-0");
+          menuIcon.classList.remove("rotate-90");
+          setTimeout(
+            () => menuIcon.classList.replace("fa-times", "fa-bars"),
+            150,
+          );
+        }
+      });
+
+      mobileLinks.forEach((link) => {
+        link.addEventListener("click", () => {
+          mobileMenu.classList.remove("max-h-64", "opacity-100", "py-4");
+          mobileMenu.classList.add("max-h-0", "opacity-0", "py-0");
+          menuIcon.classList.remove("rotate-90");
+          menuIcon.classList.replace("fa-times", "fa-bars");
         });
-
-        const menuBtn = document.getElementById('menu-btn');
-        const mobileMenu = document.getElementById('mobile-menu');
-        const menuIcon = document.getElementById('menu-icon');
-        const mobileLinks = document.querySelectorAll('.mobile-link');
-
-        menuBtn.addEventListener('click', () => {
-            if (mobileMenu.classList.contains('max-h-0')) {
-                mobileMenu.classList.remove('max-h-0', 'opacity-0', 'py-0');
-                mobileMenu.classList.add('max-h-64', 'opacity-100', 'py-4');
-                menuIcon.classList.add('rotate-90');
-                setTimeout(() => menuIcon.classList.replace('fa-bars', 'fa-times'), 150);
-            } else {
-                mobileMenu.classList.remove('max-h-64', 'opacity-100', 'py-4');
-                mobileMenu.classList.add('max-h-0', 'opacity-0', 'py-0');
-                menuIcon.classList.remove('rotate-90');
-                setTimeout(() => menuIcon.classList.replace('fa-times', 'fa-bars'), 150);
-            }
-        });
-
-        mobileLinks.forEach(link => {
-            link.addEventListener('click', () => {
-                mobileMenu.classList.remove('max-h-64', 'opacity-100', 'py-4');
-                mobileMenu.classList.add('max-h-0', 'opacity-0', 'py-0');
-                menuIcon.classList.remove('rotate-90');
-                menuIcon.classList.replace('fa-times', 'fa-bars');
-            });
-        });
+      });
     </script>
-</body>
-
+  </body>
 </html>
