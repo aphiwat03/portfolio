@@ -1,0 +1,126 @@
+/* ── Base ── */
+body {
+  font-family: "Inter", sans-serif;
+}
+
+/* ── Glass card (light) ── */
+.glass-card {
+  background: rgba(255, 255, 255, 0.85);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  border: 1px solid rgba(147, 185, 221, 0.25);
+}
+
+/* ── Gradient text ── */
+.text-gradient {
+  background: linear-gradient(to right, #1e40af, #2563eb, #93B9DD);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
+
+/* ── Project hero background ── */
+.project-hero-bg {
+  background:
+    radial-gradient(ellipse 80% 60% at 60% -10%, rgba(147, 185, 221, 0.35) 0%, transparent 60%),
+    radial-gradient(ellipse 50% 40% at 0% 100%, rgba(59, 130, 246, 0.12) 0%, transparent 60%),
+    #f0f6fc;
+}
+
+/* ── Navbar ── */
+#navbar {
+  border-bottom: 1px solid transparent;
+  transition: background 0.35s, backdrop-filter 0.35s, box-shadow 0.35s,
+    border-color 0.35s, padding 0.35s;
+}
+
+#navbar.scrolled {
+  background: rgba(255, 255, 255, 0.92);
+  backdrop-filter: blur(16px);
+  -webkit-backdrop-filter: blur(16px);
+  border-color: rgba(147, 185, 221, 0.4);
+  box-shadow: 0 4px 24px rgba(30, 64, 175, 0.06);
+  padding-top: 0.9rem;
+  padding-bottom: 0.9rem;
+}
+
+/* ── Nav link underline ── */
+.nav-link {
+  position: relative;
+  padding-bottom: 3px;
+  transition: color 0.2s;
+  color: #334155;
+}
+
+.nav-link::after {
+  content: "";
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  width: 0;
+  height: 2px;
+  background: #1d4ed8;
+  transition: width 0.3s ease;
+  border-radius: 2px;
+}
+
+.nav-link:hover::after {
+  width: 100%;
+}
+
+.nav-link:hover {
+  color: #1d4ed8;
+}
+
+/* ── Float animation ── */
+@keyframes float {
+
+  0%,
+  100% {
+    transform: translateY(0px) rotate(0deg);
+  }
+
+  50% {
+    transform: translateY(-12px) rotate(1deg);
+  }
+}
+
+.float-anim {
+  animation: float 4s ease-in-out infinite;
+}
+
+/* ── Scroll reveal ── */
+.reveal {
+  opacity: 0;
+  transform: translateY(28px);
+  transition: opacity 0.8s cubic-bezier(0.2, 0.8, 0.2, 1),
+    transform 0.8s cubic-bezier(0.2, 0.8, 0.2, 1);
+}
+
+.reveal.active {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+.delay-100 {
+  transition-delay: 100ms;
+}
+
+.delay-200 {
+  transition-delay: 200ms;
+}
+
+.delay-300 {
+  transition-delay: 300ms;
+}
+
+.delay-400 {
+  transition-delay: 400ms;
+}
+
+/* ── Hide mobile menu button on desktop ── */
+@media (min-width: 768px) {
+  #menu-btn {
+    display: none;
+  }
+}
